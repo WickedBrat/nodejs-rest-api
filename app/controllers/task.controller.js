@@ -6,7 +6,6 @@ const Op = db.Sequelize.Op;
 
 
 exports.create = (req, res) => {
-  // Validate request
   if (!req.body.title || !req.body.description || !req.body.due_date) {
     res.status(400).send({
       message: ERROR_MESSAGES.MISSING_REQUIRED_FIELDS
@@ -14,14 +13,12 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a Task
   const task = {
     title: req.body.title,
     description: req.body.description,
     due_date: req.body.due_date,
   };
 
-  // Save Task in the database
   Task.create(task)
     .then(data => {
       console.log(data);
@@ -37,9 +34,7 @@ exports.create = (req, res) => {
 
 
 exports.findAll = (req, res) => {
-  // const title = req.query.title;
   const pageNumber = req.query.pageNumber ?? 0;
-  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
   Task.findAll({ offset: pageNumber * 10, limit: 10 })
     .then(data => {
