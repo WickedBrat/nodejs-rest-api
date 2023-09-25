@@ -1,3 +1,4 @@
+const { ERROR_MESSAGES, MESSAGES } = require("../constants/messages.constants");
 const db = require("../models");
 const Task = db.tasks;
 const Op = db.Sequelize.Op;
@@ -8,7 +9,7 @@ exports.create = (req, res) => {
   // Validate request
   if (!req.body.title || !req.body.description || !req.body.due_date) {
     res.status(400).send({
-      message: "Title, description and due date can not be empty!"
+      message: ERROR_MESSAGES.MISSING_REQUIRED_FIELDS
     });
     return;
   }
@@ -29,7 +30,7 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Task."
+          err.message || ERROR_MESSAGES.SOMETHING_WENT_WRONG
       });
     });
 };
@@ -47,7 +48,7 @@ exports.findAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tasks."
+          err.message || ERROR_MESSAGES.SOMETHING_WENT_WRONG
       });
     });
 };
@@ -67,7 +68,7 @@ exports.getStatusMetrics = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tasks."
+          err.message || ERROR_MESSAGES.SOMETHING_WENT_WRONG
       });
     });
 };
@@ -108,7 +109,7 @@ exports.getTimelineMetrics = async (req, res) => {
   } catch (error) {
     res.status(500).send({
       message:
-        err.message || "Some error occurred while retrieving tasks."
+        err.message || ERROR_MESSAGES.SOMETHING_WENT_WRONG
     });
   }
 };
@@ -123,7 +124,7 @@ exports.update = (req, res) => {
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Task was updated successfully."
+          message: MESSAGES.UPDATE_SUCCESS_MESSAGE
         });
       } else {
         res.send({
