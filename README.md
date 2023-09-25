@@ -46,7 +46,7 @@ git clone https://github.com/WickedBrat/nodejs-rest-api infeedo
 
 2. This project uses `Postgres` as database. To setup Postgresql on your local, follow this guide [here](https://www.sqlshack.com/setting-up-a-postgresql-database-on-mac/)
 
-3. Create a `.env` at the root of your project and update the creds for your local.
+3. Create a `.env` at the root of your project and update the creds for your local. Use `.env.sample` for your reference.
 
 4. Now, install the dependencies for the project using `npm install` or `yarn install`
 
